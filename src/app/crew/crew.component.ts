@@ -21,7 +21,15 @@ export class CrewComponent implements OnInit {
   }
 
   add(memberName: string, isFirst: boolean) {
-    this.crew.push({name: memberName, firstMission: isFirst});
+    let crewNames: string[] = [];
+    for (let index of this.crew) {
+      crewNames.push(index['name']);
+    }
+
+    if(!crewNames.includes(memberName)) {
+      this.crew.push({name: memberName, firstMission: isFirst});
+    }
+    // this.crew.push({name: memberName, firstMission: isFirst});
   }
 
   remove(member: object) {
@@ -34,8 +42,17 @@ export class CrewComponent implements OnInit {
   }
 
   save(name: string, member, object) {
-    member['name'] = name;
-    this.memberBeingEdited = null;
-  }
+    let crewNames: string[] = [];
+    for (let index of this.crew) {
+      crewNames.push(index['name']);
+    }
 
+    if(!crewNames.includes(name)) {
+      member['name'] = name;
+      this.memberBeingEdited = null;
+    }
+    
+    // member['name'] = name;
+    // this.memberBeingEdited = null;
+  }
 }
